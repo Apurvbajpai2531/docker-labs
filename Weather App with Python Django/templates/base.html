@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>{% block title %}Weather App{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+
+    <!-- CSS -->
+    <link href="{% static 'fonts/font-awesome.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="site-content">
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container">
+
+            <a href="{% url 'home' %}" class="branding">
+                <img src="{% static 'images/logo.png' %}" alt="logo" class="logo">
+
+                <div class="logo-type">
+                    <h1 class="site-title">Weather App</h1>
+                    <small class="site-description">Real-time Weather Forecast</small>
+                </div>
+            </a>
+
+            <div class="main-navigation">
+                <button type="button" class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <ul class="menu">
+                    <li class="menu-item current-menu-item">
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" data-bg-image="{% static 'images/banner.png' %}">
+        <div class="container">
+
+            <form action="{% url 'result' %}" method="post" class="find-location">
+                {% csrf_token %}
+                <input type="text" name="city" placeholder="Enter city name..." required>
+                <input type="submit" value="Search">
+            </form>
+
+        </div>
+    </section>
+
+    <!-- PAGE CONTENT -->
+    {% block content %}
+    {% endblock content %}
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <form class="subscribe-form">
+                        <input type="email" placeholder="Enter your email..." required>
+                        <input type="submit" value="Subscribe">
+                    </form>
+                </div>
+
+            </div>
+
+            <p class="colophon">
+                © 2026 Weather App. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+</div>
+
+<!-- JS -->
+<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>
